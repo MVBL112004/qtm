@@ -6,7 +6,9 @@ if response.status_code == 200:
     soup = BeautifulSoup(response.content,'html.parser')
     article_tag = soup.find('article')
     if article_tag:
-        print(article_tag.get_text())
+        article_content = article_tag.get_text(strip=True)
+        with open('article_content.txt', 'w', encoding='utf-8') as file:
+            file.write(article_content)
     else:
         print("No <article> tag found.")
 else:
